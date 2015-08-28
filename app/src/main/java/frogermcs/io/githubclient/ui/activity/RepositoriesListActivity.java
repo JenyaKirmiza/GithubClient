@@ -24,6 +24,7 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 
 public class RepositoriesListActivity extends BaseActivity {
+
     @Bind(R.id.lvRepositories)
     ListView lvRepositories;
     @Bind(R.id.pbLoading)

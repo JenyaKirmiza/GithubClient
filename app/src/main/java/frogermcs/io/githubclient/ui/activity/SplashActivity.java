@@ -46,13 +46,11 @@ public class SplashActivity extends BaseActivity {
 
         analyticsManager.logScreenView(getClass().getName());
 
-        WidgetObservable.text(etUsername, true).subscribe(new SimpleObserver<OnTextChangeEvent>() {
-            @Override
-            public void onNext(OnTextChangeEvent onTextChangeEvent) {
+        WidgetObservable.text(etUsername, true).subscribe(onTextChangeEvent -> {
                 presenter.username = onTextChangeEvent.text().toString();
                 etUsername.setError(null);
             }
-        });
+        );
     }
 
     //Local dependencies graph is constructed here

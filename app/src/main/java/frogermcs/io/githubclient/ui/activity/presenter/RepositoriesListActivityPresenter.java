@@ -6,6 +6,7 @@ import frogermcs.io.githubclient.data.api.RepositoriesManager;
 import frogermcs.io.githubclient.data.model.Repository;
 import frogermcs.io.githubclient.ui.activity.RepositoriesListActivity;
 import frogermcs.io.githubclient.utils.SimpleObserver;
+import rx.functions.Action1;
 
 /**
  * Created by Miroslaw Stanek on 23.04.15.
@@ -22,18 +23,11 @@ public class RepositoriesListActivityPresenter {
 
     public void loadRepositories() {
         repositoriesListActivity.showLoading(true);
-        repositoriesManager.getUsersRepositories().subscribe(new SimpleObserver<ImmutableList<Repository>>() {
-            @Override
-            public void onNext(ImmutableList<Repository> repositories) {
-                repositoriesListActivity.showLoading(false);
-                repositoriesListActivity.setRepositories(repositories);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                repositoriesListActivity.showLoading(false);
-            }
+        repositoriesManager.getUsersRepositories().subscribe(repositories -> {
+            repositoriesListActivity.showLoading(false);
+            repositoriesListActivity.setRepositories(repositories);
+        },throwable -> {
+            repositoriesListActivity.showLoading(false);
         });
     }
-
 }

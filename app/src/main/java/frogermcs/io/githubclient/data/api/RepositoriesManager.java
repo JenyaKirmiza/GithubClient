@@ -7,6 +7,8 @@ import java.util.List;
 import frogermcs.io.githubclient.data.api.response.RepositoryResponse;
 import frogermcs.io.githubclient.data.model.Repository;
 import frogermcs.io.githubclient.data.model.User;
+import frogermcs.io.githubclient.ui.Func5;
+import frogermcs.io.githubclient.ui.activity.SomeClass;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -27,6 +29,11 @@ public class RepositoriesManager {
     public Observable<ImmutableList<Repository>> getUsersRepositories() {
         return githubApiService.getUsersRepositories(user.login)
                 .map(repositoryResponses -> {
+
+                    SomeClass someClas=new SomeClass(s->{
+                            return null;
+                        });
+
                         final ImmutableList.Builder<Repository> listBuilder = ImmutableList.builder();
                         for (RepositoryResponse repositoryResponse : repositoryResponses) {
                             Repository repository = new Repository();

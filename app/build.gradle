@@ -61,6 +61,7 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.0.23-beta'
 
 }
+
 retrolambda {
     javaVersion JavaVersion.VERSION_1_7
 }
