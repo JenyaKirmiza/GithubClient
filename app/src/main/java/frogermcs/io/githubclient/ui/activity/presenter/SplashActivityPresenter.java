@@ -25,19 +25,14 @@ public class SplashActivityPresenter {
     public void onShowRepositoriesClick() {
         if (validator.validUsername(username)) {
             splashActivity.showLoading(true);
-            userManager.getUser(username).subscribe(new SimpleObserver<User>() {
-                @Override
-                public void onNext(User user) {
-                    splashActivity.showLoading(false);
-                    splashActivity.showRepositoriesListForUser(user);
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    splashActivity.showLoading(false);
-                    splashActivity.showValidationError();
-                }
-            });
+            userManager.getUser(username).subscribe(user -> {
+                        splashActivity.showLoading(false);
+                        splashActivity.showRepositoriesListForUser(user);
+                    }, e -> {
+                        splashActivity.showLoading(false);
+                        splashActivity.showValidationError();
+                    }
+            );
         } else {
             splashActivity.showValidationError();
         }
